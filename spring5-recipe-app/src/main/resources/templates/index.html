@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Recipe Index Page</title>
+</head>
+<body>
+	<h1>My Recipes</h1>
+	<table border>
+		<caption>Recipes List</caption>
+		<tr>
+			<th id="td-id" colspan="2">ID</th>
+			<th id="td-description" colspan="2">Description</th>
+		</tr>
+		<tr th:each="recipe : ${recipes}">
+			<td colspan="2" th:text="${recipe.id}">123</td>
+			<td colspan="3" th:text="${recipe.description}">Tasty</td>
+		</tr>
+	</table>
+</body>
+</html>
