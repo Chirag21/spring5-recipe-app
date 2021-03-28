@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class UnitOfMeasure {
 
@@ -14,19 +17,4 @@ public class UnitOfMeasure {
 
 	private String description;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getUom() {
-		return description;
-	}
-
-	public void setUom(String uom) {
-		this.description = uom;
-	}
 }
