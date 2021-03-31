@@ -1,6 +1,7 @@
 package com.spring5.recipe.service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -21,14 +22,6 @@ public class RecipeServiceImpl implements RecipeService {
 		this.recipeRepository = recipeRepository;
 	}
 
-	public RecipeRepository getRecipeRepository() {
-		return recipeRepository;
-	}
-
-	public void setRecipeRepository(RecipeRepository recipeRepository) {
-		this.recipeRepository = recipeRepository;
-	}
-
 	@Override
 	public Set<Recipe> getRecipes() {
 		log.debug("Inside getRecipes of RecipeServiceImpl");
@@ -38,4 +31,12 @@ public class RecipeServiceImpl implements RecipeService {
 		return recipeSet;
 	}
 
+	@Override
+	public Recipe findById(Long id) {
+		Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+		if (!recipeOptional.isPresent())
+			throw new RuntimeException("Recipe not found with id = " + id);
+		else
+			return recipeOptional.get();
+	}
 }
