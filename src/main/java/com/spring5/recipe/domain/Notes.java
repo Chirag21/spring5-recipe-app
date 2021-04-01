@@ -1,4 +1,4 @@
-package com.spring5.recipe.domain;
+	package com.spring5.recipe.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
