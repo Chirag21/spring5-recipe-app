@@ -10,7 +10,7 @@ import com.spring5.recipe.domain.Recipe;
 import lombok.Synchronized;
 
 @Component
-public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
+public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe>{
 
 	private final CategoryCommandToCategory categoryConveter;
 	private final IngredientCommandToIngredient ingredientConverter;
@@ -23,9 +23,9 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 		this.notesConverter = notesConverter;
 	}
 
+	@Override
 	@Synchronized
 	@Nullable
-	@Override
 	public Recipe convert(RecipeCommand source) {
 		if (source == null) {
 			return null;

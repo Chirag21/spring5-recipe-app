@@ -1,5 +1,7 @@
 package com.spring5.recipe.converters;
 
+import java.util.Objects;
+
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -44,12 +46,12 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
 		command.setUrl(source.getUrl());
 		command.setNotes(notesConverter.convert(source.getNotes()));
 
-		if (source.getCategories() != null && source.getCategories().size() > 0) {
+		if (Objects.nonNull(source.getCategories()) && !source.getCategories().isEmpty()) {
 			source.getCategories()
 					.forEach((Category category) -> command.getCategories().add(categoryConveter.convert(category)));
 		}
 
-		if (source.getIngredients() != null && source.getIngredients().size() > 0) {
+		if (Objects.nonNull(source.getIngredients()) && !source.getIngredients().isEmpty()) {
 			source.getIngredients()
 					.forEach(ingredient -> command.getIngredients().add(ingredientConverter.convert(ingredient)));
 		}

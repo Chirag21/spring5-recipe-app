@@ -25,6 +25,7 @@ import com.spring5.recipe.domain.Recipe;
 import com.spring5.recipe.service.RecipeService;
 
 class IndexControllerTest {
+	
 	@Mock
 	RecipeService recipeService;
 

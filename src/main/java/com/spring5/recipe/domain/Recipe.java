@@ -17,16 +17,18 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Recipe {
 
-	@Id()
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	private String description;
 	private Integer prepTime;
 	private Integer cookTime;
@@ -43,24 +45,23 @@ public class Recipe {
 	@Lob
 	private Byte[] image;
 
-	@Enumerated(EnumType.STRING) // ORIDNAL is default(saved in DB as numbers)
+	@Enumerated(value = EnumType.STRING) // ORIDNAL is default(saved in DB as numbers)
 	private Difficulty difficulty;
 
 	@ManyToMany
 	@JoinTable(name = "recipe_category", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	@OneToOne(cascade = CascadeType.ALL)
 	private Notes notes;
 
+    public void setNotes(Notes notes) {
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
+    }
+	
 	public Recipe addIngredients(Ingredient ingredient) { // helper method
 		ingredient.setRecipe(this);
 		this.ingredients.add(ingredient);

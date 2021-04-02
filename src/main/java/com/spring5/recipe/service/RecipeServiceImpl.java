@@ -25,7 +25,6 @@ public class RecipeServiceImpl implements RecipeService {
 
 	public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe,
 			RecipeToRecipeCommand recipeToRecipeCommand) {
-		super();
 		this.recipeRepository = recipeRepository;
 		this.recipeCommandToRecipe = recipeCommandToRecipe;
 		this.recipeToRecipeCommand = recipeToRecipeCommand;
@@ -45,8 +44,8 @@ public class RecipeServiceImpl implements RecipeService {
 		Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 		if (!recipeOptional.isPresent())
 			throw new RuntimeException("Recipe not found with id = " + id);
-		else
-			return recipeOptional.get();
+
+		return recipeOptional.get();
 	}
 
 	@Override
@@ -56,5 +55,16 @@ public class RecipeServiceImpl implements RecipeService {
 		Recipe savedRecipe = recipeRepository.save(detachedRecipe);
 		log.debug("Saved recipe with id = " + savedRecipe.getId());
 		return recipeToRecipeCommand.convert(savedRecipe);
+	}
+
+	@Override
+	@Transactional
+	public RecipeCommand findRecipeCommandById(Long id) {
+		return recipeToRecipeCommand.convert(findById(id));
+	}
+
+	@Override
+	public void deleteById(Long idToDelete) {
+		recipeRepository.deleteById(idToDelete);
 	}
 }

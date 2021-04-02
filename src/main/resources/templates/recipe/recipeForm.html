@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Show Recipe</title>
+<title>Recipe Form</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -35,7 +35,7 @@
 								<div class="row">
 									<div class="col-md-3 form-group">
 										<label>Recipe Description:</label>
-										<input type="text" class="form-control" th:field="*{description}"/>
+										 <input type="text" class="form-control" th:field="*{description}" />
 									</div>
 								</div>
 								<div class="row">
@@ -45,14 +45,14 @@
 									<div class="col-md-9 form-group">
 										<div class="radio">
 											<label>
-											<input type="checkbox" value="" />
-											Cat 1
+											<input type="checkbox" value="" /> 
+											Cat 1 
 											</label>
 										</div>
 										<div class="radio" th:remove="all">
-											<label>
-											<input type="checkbox" value="" />
-											Cat 2
+											<label> 
+											<input type="checkbox" value="" /> 
+											Cat 2 
 											</label>
 										</div>
 									</div>
@@ -60,7 +60,7 @@
 								<div class="row">
 									<div class="col-md-3 form-group">
 										<label>Preparation Time:</label>
-										<input type="text" class="form-control" th:field="*{prepTime}" />
+										<input type="text"	class="form-control" th:field="*{prepTime}" />
 									</div>
 									<div class="col-md-3 form-group">
 										<label>Cook Time:</label>
@@ -78,11 +78,11 @@
 								<div class="row">
 									<div class="col-md-3 form-group">
 										<label>Servings:</label>
-										<input type="text" class="form-control" th:field="*{servings}" />
+										<input type="text"	class="form-control" th:field="*{servings}" />
 									</div>
 									<div class="col-md-3 form-group">
 										<label>Source:</label>
-										<input type="text" class="form-control" th:field="*{source}" />
+										<input type="text" class="form-control"	th:field="*{source}" />
 									</div>
 									<div class="col-md-3 form-group">
 										<label>URL:</label>
@@ -98,23 +98,21 @@
 										<h1 class="panel-title">Ingredients</h1>
 									</div>
 									<div class="col-md-1">
-										<a class="btn btn-default" href="#"	th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}"	role="button">View</a>
+										<a class="btn btn-default" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
 									</div>
 								</div>
 							</div>
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-12">
-										<ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
+										<ul>
 											<li th:remove="all">1 Cup of milk</li>
 											<li th:remove="all">1 Teaspoon of chocolate</li>
-											<li th:remove="all">asdf</li>
-											<li th:each="ingredient : ${recipe.ingredients}" 
-												th:text="${(ingredient.amount +
-                                        	' ' + ingredient.unitOfMeasure.description +
-                                        	' - ' + ingredient.description)}">1
-												Teaspoon of Sugar
-											</li>
+											<li th:each="ingredient : ${recipe.ingredients}"
+												th:text="${(ingredient.getAmount() +
+                                        	' ' + ingredient.getUnitOfMeasure().getDescription() +
+                                        	' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
+                                        	</li>
 										</ul>
 									</div>
 								</div>
@@ -144,7 +142,7 @@
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="submit" class="btn btn-primary">Submit</button>
 					</div>
 				</form>
 			</div>

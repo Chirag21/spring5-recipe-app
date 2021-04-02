@@ -10,18 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(exclude = "recipe")
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = { "recipe" })
 @Entity
 public class Ingredient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	private String description;
 	private BigDecimal amount;
 
@@ -32,18 +33,15 @@ public class Ingredient {
 	private UnitOfMeasure unitOfMeasure;
 
 	public Ingredient() {
-		super();
 	}
 
 	public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
-		super();
 		this.description = description;
 		this.amount = amount;
 		this.unitOfMeasure = unitOfMeasure;
 	}
 
 	public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
-		super();
 		this.description = description;
 		this.amount = amount;
 		this.unitOfMeasure = unitOfMeasure;

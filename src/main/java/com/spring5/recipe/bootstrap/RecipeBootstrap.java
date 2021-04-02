@@ -38,8 +38,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		this.unitOfMeasureRepository = unitOfMeasureRepository;
 	}
 
-	@Transactional
 	@Override
+	@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		recipeRepository.saveAll(getRecipes());
 		log.debug("Loading bootstrap data");
@@ -184,7 +184,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 				+ "Grill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!\n"
 				+ "\n" + "\n"
 				+ "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
-		tacoNotes.setRecipe(tacosRecipe);
+		//tacoNotes.setRecipe(tacosRecipe);
 		tacosRecipe.setNotes(tacoNotes);
 
 		tacosRecipe.addIngredients(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tableSpoonUom, tacosRecipe));
