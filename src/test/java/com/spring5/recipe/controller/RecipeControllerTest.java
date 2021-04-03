@@ -1,5 +1,7 @@
 package com.spring5.recipe.controller;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -86,4 +88,19 @@ class RecipeControllerTest {
                 .andExpect(view().name("recipe/recipeForm"))
                 .andExpect(model().attributeExists("recipe"));
     }
+
+	@Test
+	void testDeleteById() {
+		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
+		try {
+			mockMvc.perform(get("/recipe/2/delete"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/index"));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		verify(recipeService,times(1)).deleteById(ArgumentMatchers.anyLong());
+	}
 }

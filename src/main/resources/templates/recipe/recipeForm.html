@@ -34,8 +34,8 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-3 form-group">
-										<label>Recipe Description:</label>
-										 <input type="text" class="form-control" th:field="*{description}" />
+										<label>Recipe Description:</label> <input type="text"
+											class="form-control" th:field="*{description}" />
 									</div>
 								</div>
 								<div class="row">
@@ -44,31 +44,34 @@
 									</div>
 									<div class="col-md-9 form-group">
 										<div class="radio">
-											<label>
-											<input type="checkbox" value="" /> 
-											Cat 1 
+											<label> <input type="checkbox" value="" /> Cat 1
 											</label>
 										</div>
 										<div class="radio" th:remove="all">
-											<label> 
-											<input type="checkbox" value="" /> 
-											Cat 2 
+											<label> <input type="checkbox" value="" /> Cat 2
 											</label>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-3 form-group">
-										<label>Preparation Time:</label>
-										<input type="text"	class="form-control" th:field="*{prepTime}" />
+										<label>Preparation Time:</label> <input type="text"
+											class="form-control" th:field="*{prepTime}" />
 									</div>
 									<div class="col-md-3 form-group">
-										<label>Cook Time:</label>
-										<input type="text" class="form-control" th:field="*{cookTime}" />
+										<label>Cook Time:</label> <input type="text"
+											class="form-control" th:field="*{cookTime}" />
 									</div>
 									<div class="col-md-3 form-group">
 										<label>Difficulty:</label>
-										<select class="form-control">
+										<select class="form-control" th:field="*{difficulty}">
+										<option th:each="difficultyValue :${T(com.spring5.recipe.domain.Difficulty).values()}"
+										th:value="${difficultyValue}"
+										th:text="${difficultyValue}">
+										</option>
+										</select>
+										
+										<select class="form-control" th:remove="all">
 											<option>Easy</option>
 											<option>Medium</option>
 											<option>Hard</option>
@@ -77,16 +80,16 @@
 								</div>
 								<div class="row">
 									<div class="col-md-3 form-group">
-										<label>Servings:</label>
-										<input type="text"	class="form-control" th:field="*{servings}" />
+										<label>Servings:</label> <input type="text"
+											class="form-control" th:field="*{servings}" />
 									</div>
 									<div class="col-md-3 form-group">
-										<label>Source:</label>
-										<input type="text" class="form-control"	th:field="*{source}" />
+										<label>Source:</label> <input type="text" class="form-control"
+											th:field="*{source}" />
 									</div>
 									<div class="col-md-3 form-group">
-										<label>URL:</label>
-										<input type="text" class="form-control"	th:field="*{url}" />
+										<label>URL:</label> <input type="text" class="form-control"
+											th:field="*{url}" />
 									</div>
 								</div>
 							</div>
@@ -98,7 +101,9 @@
 										<h1 class="panel-title">Ingredients</h1>
 									</div>
 									<div class="col-md-1">
-										<a class="btn btn-default" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
+										<a class="btn btn-default" href="#"
+											th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}"
+											role="button">View</a>
 									</div>
 								</div>
 							</div>
@@ -111,8 +116,8 @@
 											<li th:each="ingredient : ${recipe.ingredients}"
 												th:text="${(ingredient.getAmount() +
                                         	' ' + ingredient.getUnitOfMeasure().getDescription() +
-                                        	' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
-                                        	</li>
+                                        	' - ' + ingredient.getDescription())}">1
+												Teaspoon of Sugar</li>
 										</ul>
 									</div>
 								</div>
@@ -125,7 +130,8 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-12 form-group">
-										<textarea class="form-control" rows="3"	th:field="*{directions}"></textarea>
+										<textarea class="form-control" rows="3"
+											th:field="*{directions}"></textarea>
 									</div>
 								</div>
 							</div>
@@ -137,7 +143,8 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-12 form-group">
-										<textarea class="form-control" rows="3"	th:field="*{notes.recipeNotes}"></textarea>
+										<textarea class="form-control" rows="3"
+											th:field="*{notes.recipeNotes}"></textarea>
 									</div>
 								</div>
 							</div>
