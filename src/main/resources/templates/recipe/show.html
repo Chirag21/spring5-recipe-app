@@ -31,28 +31,27 @@
 							<div class="panel-heading">
 								<h1 class="panel-title">Edit Recipe Information</h1>
 							</div>
-							<div class="col-md-6 form-group">
-								<img alt="food image"
-										src="../../static/images/guacamole400x400WithX.jpg"
-										th:src="@{/images/guacamole400x400WithX.jpg}" width="200"
-										height="200">
-							</div>
-							
+
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-3 form-group">
 										<label>Recipe Description:</label> <input type="text"
 											style="width: fit-content;" class="form-control" th:field="*{description}" />
-									</div>
 								</div>
-								
-								<div class="row">
+							</div>
+							<div class="col-md-6 form-group">
+								<img alt="food image" src="../../static/images/guacamole400x400WithX.jpg"
+										th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}" 
+										width="200"	height="200" style="margin-left: 300px;">
+							</div>
+							<div class="row"></div>
+							<div class="row">
 								<div class="col-md-1">
-										<a class="btn btn-default" href="#"
+									<a class="btn btn-default" href="#"
 											th:href="@{'/recipe/' + ${recipe.id} + '/image'}"
-											role="button">Change Image</a>
+											role="button" style="margin-left: 350px;">Change Image</a>
 								</div>
-								</div>
+							</div>
 								
 								<div class="row" style="margin-top: 7px">
 									<div class="col-md-3 form-group">
@@ -64,7 +63,7 @@
 											</label>
 										</div>
 										<div class="radio" th:remove="all">
-											<label> <input type="checkbox" value="" /> Cat 2
+											<label> <input type="checkbox"	 value="" /> Cat 2
 											</label>
 										</div>
 									</div>

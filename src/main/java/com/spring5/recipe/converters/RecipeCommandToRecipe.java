@@ -1,5 +1,6 @@
 package com.spring5.recipe.converters;
 
+import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -41,13 +42,14 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe>{
 		recipe.setServings(source.getServings());
 		recipe.setSource(source.getSource());
 		recipe.setUrl(source.getUrl());
+		recipe.setImage(source.getImage());
 		recipe.setNotes(notesConverter.convert(source.getNotes()));
 
-		if (source.getCategories() != null && source.getCategories().size() > 0) {
+		if (source.getCategories() != null && !source.getCategories().isEmpty()) {
 			source.getCategories().forEach(category -> recipe.getCategories().add(categoryConveter.convert(category)));
 		}
 
-		if (source.getIngredients() != null && source.getIngredients().size() > 0) {
+		if (source.getIngredients() != null && !source.getIngredients().isEmpty()) {
 			source.getIngredients()
 					.forEach(ingredient -> recipe.getIngredients().add(ingredientConverter.convert(ingredient)));
 		}
