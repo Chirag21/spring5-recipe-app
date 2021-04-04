@@ -31,14 +31,30 @@
 							<div class="panel-heading">
 								<h1 class="panel-title">Edit Recipe Information</h1>
 							</div>
+							<div class="col-md-6 form-group">
+								<img alt="food image"
+										src="../../static/images/guacamole400x400WithX.jpg"
+										th:src="@{/images/guacamole400x400WithX.jpg}" width="200"
+										height="200">
+							</div>
+							
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-3 form-group">
 										<label>Recipe Description:</label> <input type="text"
-											class="form-control" th:field="*{description}" />
+											style="width: fit-content;" class="form-control" th:field="*{description}" />
 									</div>
 								</div>
+								
 								<div class="row">
+								<div class="col-md-1">
+										<a class="btn btn-default" href="#"
+											th:href="@{'/recipe/' + ${recipe.id} + '/image'}"
+											role="button">Change Image</a>
+								</div>
+								</div>
+								
+								<div class="row" style="margin-top: 7px">
 									<div class="col-md-3 form-group">
 										<label>Categories:</label>
 									</div>
@@ -53,34 +69,24 @@
 										</div>
 									</div>
 								</div>
-								
-								
-								<div class="col-md-6">
-								<img alt="food image" src="../../static/images/guacamole400x400WithX.jpg"
-								th:src="@{images/uacamole400x400WithX.jpg}"
-								width="200" height="200">
-								</div>
-								
-								
+
 								<div class="row">
 									<div class="col-md-3 form-group">
-										<label>Preparation Time*</label> <input
-											type="text" class="form-control" th:field="*{prepTime}" />
+										<label>Preparation Time*</label> <input type="text"
+											class="form-control" th:field="*{prepTime}" />
 									</div>
 									<div class="col-md-3 form-group">
 										<label>Cook Time*</label> <input type="text"
 											class="form-control" th:field="*{cookTime}" />
 									</div>
 									<div class="col-md-3 form-group">
-										<label>Difficulty:</label>
-										<select class="form-control" th:field="*{difficulty}">
-										<option th:each="difficultyValue :${T(com.spring5.recipe.domain.Difficulty).values()}"
-										th:value="${difficultyValue}"
-										th:text="${difficultyValue}">Val
-										</option>
-										</select>
-										
-										 <select class="form-control" th:remove="all">
+										<label>Difficulty:</label> <select class="form-control"
+											th:field="*{difficulty}">
+											<option
+												th:each="difficultyValue :${T(com.spring5.recipe.domain.Difficulty).values()}"
+												th:value="${difficultyValue}" th:text="${difficultyValue}">Val
+											</option>
+										</select> <select class="form-control" th:remove="all">
 											<option>Easy</option>
 											<option>Medium</option>
 											<option>Hard</option>
@@ -98,7 +104,7 @@
 									</div>
 									<div class="col-md-3 form-group">
 										<label>URL:</label> <input type="text" class="form-control"
-											th:field="*{url}" />
+											style="width: fit-content;" th:field="*{url}" />
 									</div>
 								</div>
 								<small style="color: navy;">*in minutes</small>
