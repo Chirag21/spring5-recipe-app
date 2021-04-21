@@ -17,9 +17,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import com.spring5.recipe.commands.RecipeCommand;
 import com.spring5.recipe.domain.Recipe;
+import com.spring5.recipe.exceptions.RecipeNotFoundException;
 import com.spring5.recipe.service.RecipeService;
 
 class RecipeControllerTest {
@@ -52,6 +52,31 @@ class RecipeControllerTest {
                 .andExpect(model().attributeExists("recipe"));
     }
 
+    @Test
+    void recipeNotFoundGetTest() {
+    	when(recipeService.findById(ArgumentMatchers.anyLong())).thenThrow(RecipeNotFoundException.class);
+    	
+    	try {
+			mockMvc.perform(get("/recipe/1/show"))
+				.andExpect(status().isNotFound())
+				.andExpect(view().name("404Error"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
+    @Test
+    void recipeNumberFormatExceptionTest() {
+   	
+    	try {
+			mockMvc.perform(get("/recipe/asdf/show"))
+				.andExpect(status().isBadRequest())
+				.andExpect(view().name("400Error"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+    
     @Test
     void testGetNewRecipeForm() throws Exception {
         mockMvc.perform(get("/recipe/new"))
@@ -101,4 +126,6 @@ class RecipeControllerTest {
 		
 		verify(recipeService,times(1)).deleteById(ArgumentMatchers.anyLong());
 	}
+	
+	
 }

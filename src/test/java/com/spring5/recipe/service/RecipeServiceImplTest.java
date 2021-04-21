@@ -20,10 +20,11 @@ import org.mockito.MockitoAnnotations;
 import com.spring5.recipe.converters.RecipeCommandToRecipe;
 import com.spring5.recipe.converters.RecipeToRecipeCommand;
 import com.spring5.recipe.domain.Recipe;
+import com.spring5.recipe.exceptions.RecipeNotFoundException;
 import com.spring5.recipe.repositories.RecipeRepository;
 
 class RecipeServiceImplTest {
-	RecipeServiceImpl recipeService;
+	RecipeService recipeService;
 
 	@Mock
 	RecipeRepository recipeRepository;
@@ -70,6 +71,13 @@ class RecipeServiceImplTest {
 		assertEquals(recipes.size(), 1);
 		verify(recipeRepository, times(1)).findAll();
 		verify(recipeRepository, never()).findById(ArgumentMatchers.anyLong());
+	}
+	
+	@org.junit.Test(expected=RecipeNotFoundException.class)
+	void getRecipeByIdNotFoundTest() {
+		Optional<Recipe> recipeOptional = Optional.empty();
+		when(recipeService.findById(ArgumentMatchers.anyLong())).thenReturn(recipeOptional.get());
+		recipeService.findById(1L);
 	}
 
 }
